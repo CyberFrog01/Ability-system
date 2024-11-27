@@ -4,10 +4,81 @@
 #include "Player/AuraPlayerController.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Interaction/MouseoverInterface.h"
 
 AAuraPlayerController::AAuraPlayerController()
 {
 	bReplicates = true;
+}
+
+void AAuraPlayerController::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+
+	CursorTrace();
+}
+
+void AAuraPlayerController::CursorTrace()
+{
+	FHitResult CursorHit;
+	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
+
+	if (!CursorHit.bBlockingHit) return;
+
+	LastActor = CurrentActor;
+	CurrentActor = CursorHit.GetActor();
+
+	/**
+	 * Line trace from curser. Scenaries:
+	 * A. Last - null && Current - null
+	 *	- Do nothing
+	 * B. Last - null && Current - valid
+	 *	- Current - highlight
+	 * C. Last - valid && Current - null
+	 *  - Last - unhighlight
+	 * D. Last - valid && Current - valid && Last == Current
+	 *	- Do nothing
+	 * E. Last - valid && Current - valid && Last != Current
+	 *	- Current - highlight
+	 *  - Last - unhighlight
+	 * 
+	 */
+
+	if (LastActor == nullptr)
+	{
+		//Case A
+		if (CurrentActor == nullptr)
+		{
+			//Do nothing
+		}
+		//Case B
+		else
+		{
+			CurrentActor->HighlightActor();
+		}
+	}
+	else
+	{
+		//Case C
+		if (CurrentActor == nullptr)
+		{
+			LastActor->UnHighlightActor();
+		}
+		else 
+		{
+			//Case D
+			if (CurrentActor == LastActor)
+			{
+				//Do nothing
+			}
+			//Case E
+			else
+			{
+				CurrentActor->HighlightActor();
+				LastActor->UnHighlightActor();
+			}
+		}
+	}
 }
 
 void AAuraPlayerController::BeginPlay()

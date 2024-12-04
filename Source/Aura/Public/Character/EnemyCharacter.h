@@ -16,6 +16,12 @@ class AURA_API AEnemyCharacter : public ACharacterBase, public IMouseoverInterfa
 	GENERATED_BODY()
 public:
 	AEnemyCharacter();
+
+	/** Mouseover Interface */
 	virtual void HighlightActor() override;
 	virtual void UnHighlightActor() override;
+	/** End Mouseover Interface */
+
+protected:
+	virtual void BeginPlay() override;
 };

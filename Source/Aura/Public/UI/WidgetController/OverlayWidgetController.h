@@ -15,10 +15,10 @@ struct FUIWidgetRow : public FTableRowBase
 	FGameplayTag MessageTag = FGameplayTag();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	FText MessageText = FText();
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<class UAuraUserWidget> MessageWidget;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FText MessageText = FText();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UTexture2D* Image = nullptr;

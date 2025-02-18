@@ -1,9 +1,9 @@
 // Copyright CyberFrog
 
 
-#include "GameplayEffectExtension.h"
-#include "AbilitySystem/AuraAttributeSet.h"
 
+#include "AbilitySystem/AuraAttributeSet.h"
+#include "GameplayEffectExtension.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "GameFramework/Character.h"
 #include "Net/UnrealNetwork.h"

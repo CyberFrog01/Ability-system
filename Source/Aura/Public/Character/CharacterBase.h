@@ -12,6 +12,7 @@
 class UAbilitySystemComponent;
 class UAttributeSet;
 class UGameplayEffect;
+class UGameplayAbility;
 
 UCLASS(Abstract)
 class AURA_API ACharacterBase : public ACharacter, public IAbilitySystemInterface, public ICombatInterface
@@ -29,7 +30,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, Category = "Combat")
+	UPROPERTY(EditAnywhere, Category = "Aura|Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
 
 	UPROPERTY()
@@ -40,15 +41,21 @@ protected:
 
 	virtual void InitAbilityActorInfo();
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Aura|Attributes")
 	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributes;
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Aura|Attributes")
 	TSubclassOf<UGameplayEffect> DefaultSecondaryAttributes;
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Aura|Attributes")
 	TSubclassOf<UGameplayEffect> DefaultVitalAttributes;
 	
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const;
 	void InitDefaultAttributes() const;
+	void AddCharacterAbilities() const;
+	
+private:
+	UPROPERTY(EditAnywhere, Category = "Aura|Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+	
 };

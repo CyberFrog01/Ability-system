@@ -18,7 +18,7 @@ public:
 	static void InitNativeGameplayTags();
 
 	//Primary
-	FGameplayTag Attributes_Primary_Strenght;
+	FGameplayTag Attributes_Primary_Strength;
 	FGameplayTag Attributes_Primary_Intelligence;
 	FGameplayTag Attributes_Primary_Resilience;
 	FGameplayTag Attributes_Primary_Vigor;

@@ -49,6 +49,8 @@ struct FEffectProperties
 	TObjectPtr<ACharacter> TargetCharacter = nullptr;
 };
 
+template<class T>
+using TStaticFuncPtr = typename TBaseStaticDelegateInstance<T, FDefaultDelegateUserPolicy>::FFuncPtr;
 
 /**
  * 
@@ -67,11 +69,13 @@ public:
 
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 
+	TMap<FGameplayTag, TStaticFuncPtr<FGameplayAttribute()>> TagsToAttribute;
+	
 
 	//Primary attr
-	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Strenght, Category = "Primary Attributes")
-	FGameplayAttributeData Strenght;
-	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Strenght);
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Strength, Category = "Primary Attributes")
+	FGameplayAttributeData Strength;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Strength);
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Intelligence, Category = "Primary Attributes")
 	FGameplayAttributeData Intelligence;
@@ -155,7 +159,7 @@ public:
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxHealth) const;
 
 	UFUNCTION()
-	void OnRep_Strenght(const FGameplayAttributeData& OldStrenght) const;
+	void OnRep_Strength(const FGameplayAttributeData& OldStrength) const;
 
 	UFUNCTION()
 	void OnRep_Intelligence(const FGameplayAttributeData& OldIntelligence) const;

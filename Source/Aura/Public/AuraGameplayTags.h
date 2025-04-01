@@ -34,7 +34,14 @@ public:
 	FGameplayTag Attributes_Secondary_CritResist;
 	FGameplayTag Attributes_Secondary_MaxHealth;
 	FGameplayTag Attributes_Secondary_HealthRegen;
-protected:
+
+	//Input map
+	FGameplayTag InputTag_LMB;
+	FGameplayTag InputTag_RMB;
+	FGameplayTag InputTag_Num1;
+	FGameplayTag InputTag_Num2;
+	FGameplayTag InputTag_Num3;
+	FGameplayTag InputTag_Num4;
 	
 private:
 	static FAuraGameplayTags GameplayTags;
